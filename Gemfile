@@ -37,6 +37,10 @@ gem "autoprefixer-rails"
 gem 'font-awesome-sass'
 #### ####
 gem 'omniauth-facebook'
+#### ####
+gem "paperclip", git: "git://github.com/thoughtbot/paperclip.git"
+#### ####
+gem 'aws-sdk', '~> 2'
 
 
 group :development, :test do
