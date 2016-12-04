@@ -43,6 +43,12 @@ gem "paperclip", git: "git://github.com/thoughtbot/paperclip.git"
 gem 'aws-sdk', '~> 2'
 #### ####
 gem 'simple_form'
+#### ####
+gem "cancancan"
+#### ####
+gem 'data-confirm-modal', github: 'ifad/data-confirm-modal'
+
+
 
 
 

@@ -1,3 +1,19 @@
+Skip to content
+This repository  
+Search
+Pull requests
+Issues
+Gist
+ @pacafs
+ Unwatch 2
+  Star 2
+ Fork 2 stukio/tinstuk
+ Code  Issues 0  Pull requests 0  Wiki  Pulse  Graphs  Settings
+Branch: master Find file Copy pathtinstuk/vendor/assets/javascripts/jquery.jTinder.js
+d3e6200  on Jun 12
+@pacafs pacafs Changed the li count
+1 contributor
+RawBlameHistory     250 lines (204 sloc)  7.62 KB
 /*
  * jTinder v.1.0.0
  * https://github.com/do-web/jTinder
@@ -63,14 +79,35 @@
 		showPane: function (index) {
 			panes.eq(current_pane).hide().remove();
 			current_pane = index;
-		
-		//   My code 	//
-		var li_count = $( "#tinderslide > ul > li" ).length;
-			
-			//Custom -> Add more elements if reaching the end!
-		    if ( li_count == 5 ) {
 
-						var last_id = $( "#tinderslide > ul > li" ).first().attr("id");
+			$(".spinner").show();
+			
+		    var li_count = $( "#tinderslide > ul > li" ).length;
+			//Custom -> Add more elements if reaching the end!
+		    if( li_count < 2 ) {
+        	    	
+		    		if( li_count == 0 ) {
+
+		    			    // make an ajax call passing along our last user id
+					        $.ajax({
+					            // make a get request to the server
+					            type: "GET",
+					            // get the url from the href attribute of our link
+					            url: "/users",
+					            // the response will be a script
+					            dataType: "script",
+					 
+					            // upon success 
+					            success: function (e) {
+					            	$(".spinner").hide(); // Do something on success!
+					            }
+
+					        });
+		    		
+		    		} else {
+
+        	    	var last_id = $( "#tinderslide > ul > li" ).first().attr("id"); //panes.eq(current_pane).attr("id");
+						
 							// make an ajax call passing along our last user id
 					        $.ajax({
 					 
@@ -87,29 +124,12 @@
 					 
 					            // upon success 
 					            success: function (e) {
+					            	$(".spinner").hide(); // Do somethig on success!
 					            }
 
 					        });
-
-		    		
-		    } else if (li_count == 0 && load_more == true) {
-
-					        $.ajax({
-					            // make a get request to the server
-					            type: "GET",
-					            // get the url from the href attribute of our link
-					            url: "/users",
-					            // the response will be a script
-					            dataType: "script",
-					 
-					            // upon success 
-					            success: function (e) {
-					            }
-
-					        });
-
-			} // End if li_count
-			//	My code 	//
+					}
+      		} 	
 
 		},
 
@@ -133,6 +153,7 @@
 				}
 				$that.next();
 			});
+
 		},
 
 		handler: function (ev) {
@@ -236,3 +257,11 @@
 	};
 
 })(jQuery, window, document);
+
+
+
+
+
+
+Status API Training Shop Blog About Pricing
+© 2015 GitHub, Inc. Terms Privacy Security Contact Help
