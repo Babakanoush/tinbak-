@@ -2,27 +2,27 @@ class UsersController < ApplicationController
 	
 	before_action :require_login
 	before_action :set_user, only:[:edit, :profile, :update, :destroy, :get_email]
-
+	
 	def index
-	      if params[:id]
-	        @users = User.where('id < ?', params[:id]).limit(2)
-	      else
-	        @users = User.all.limit(2)
-	      end
+
+	    if params[:id]
+	      @users = User.gender(current_user).where('id < ?', params[:id]).not_me(current_user).limit(10) - current_user.matches(current_user)
+	    else
+	      @users = User.gender(current_user).not_me(current_user).limit(10) - current_user.matches(current_user)
+	    end
 
 	    respond_to do |format|
 	      format.html
 	      format.js
 	    end
-	    
+
 	end
+
 
 	def edit
+	   authorize! :update, @user
 	end
 
-	def profile
-	end
-	
 	def update
 		if @user.update(user_params)
 			respond_to do |format|
@@ -32,8 +32,13 @@ class UsersController < ApplicationController
 			redirect_to edit_user_path(@user)
 		end
 	end
-	
-    def destroy
+
+
+	def profile
+	end
+
+
+	def destroy
 		if @user.destroy
 			redirect_to root_path
 			session[:user_id]  = nil
@@ -43,16 +48,17 @@ class UsersController < ApplicationController
 		end
 	end
 
-    def matches
+	def matches
 		@matches = current_user.friendships.where(state: "ACTIVE").map(&:friend) + current_user.inverse_friendships.where(state: "ACTIVE").map(&:user)
 	end
-	
+
 	def get_email
 	  	respond_to do |format|
 	      format.js
 	    end
   	end
-  	
+
+
 	private
 
 	def set_user
@@ -64,3 +70,5 @@ class UsersController < ApplicationController
 	end
 
 end
+
+
