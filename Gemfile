@@ -35,6 +35,8 @@ gem 'bootstrap-sass', '~> 3.3.5'
 gem "autoprefixer-rails"
 #### ####
 gem 'font-awesome-sass'
+#### ####
+gem 'omniauth-facebook'
 
 
 group :development, :test do
