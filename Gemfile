@@ -41,6 +41,9 @@ gem 'omniauth-facebook'
 gem "paperclip", git: "git://github.com/thoughtbot/paperclip.git"
 #### ####
 gem 'aws-sdk', '~> 2'
+#### ####
+gem 'simple_form'
+
 
 
 group :development, :test do
