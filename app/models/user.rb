@@ -1,7 +1,9 @@
 class User < ActiveRecord::Base
     
     default_scope { order('id DESC') }
-  
+  has_many :friendships, dependent: :destroy
+    has_many :inverse_friendships, class_name: "Friendship", foreign_key: "friend_id", dependent: :destroy
+
   has_attached_file :avatar, 
                   :storage  => :s3, 
                   :styles => { :medium => "370x370", :thumb => "100x100" },
